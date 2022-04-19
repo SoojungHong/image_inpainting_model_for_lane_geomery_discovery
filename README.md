@@ -61,9 +61,10 @@ In case the experiment is conducting using different loss function, please doubl
  
   
 # Inference
-
+  
   in <path-to-this-repo>/
   python predict.py model_cn config.json images/test_2.jpg test_2_out.jpg
+
 
   
 # Data 
