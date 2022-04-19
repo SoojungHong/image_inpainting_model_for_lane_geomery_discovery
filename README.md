@@ -1,4 +1,4 @@
-# Image Inpainting Model
+# Image Inpainting Model to discover the hidden lane geometry
 This project is presenting the baseline model and the corresponding paper. 
 Furthermore, this repository contains several modified models (Image inpainting models) that improved the image quality. 
 The model modification against the vanila model has been done in architecture and in loss functions. 
