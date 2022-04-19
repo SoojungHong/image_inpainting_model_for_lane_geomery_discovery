@@ -59,6 +59,8 @@ In case the experiment is conducting using different loss function, please doubl
   
   rain_with_various_loss.py is for training the various loss function. The newly adapted loss function is explained in the paper in summary folder.
  
+  # in <path-to-this-repo>
+python train.py datasets/img_align_celeba results/demo/
   
 # Inference
   
