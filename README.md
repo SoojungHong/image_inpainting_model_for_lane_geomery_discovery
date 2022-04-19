@@ -47,3 +47,5 @@ In case the experiment is conducting using different loss function, please doubl
   
   rain_with_various_loss.py is for training the various loss function. The newly adapted loss function is explained in the paper in summary folder.
   
+# Data 
+  Data for train and evaluation can be downloaded in the Google Drive folders (refer the wiki 'data' page)
