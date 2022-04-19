@@ -18,7 +18,7 @@ Based on the baseline model (GLCIC), several experiments have been conducted. Th
 https://confluence.in.here.com/pages/viewpage.action?pageId=1135190018
 
 
-# Hyperparameters for train
+# Hyperparameters
 Since there are many experiments conducted and each experiment has different target to achieve. Therefore, before running the experiment, following features of the model need to be double checked in the parameter setting code.
 
 1. Parallel traininig using multiple GPU 
