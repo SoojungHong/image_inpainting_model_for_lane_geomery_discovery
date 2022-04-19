@@ -58,6 +58,12 @@ In case the experiment is conducting using different loss function, please doubl
   train_with_deep_dual_conv.py is for training with improved architecture which use dual deep dilated convolution layers.
   
   rain_with_various_loss.py is for training the various loss function. The newly adapted loss function is explained in the paper in summary folder.
+ 
+  
+# Inference
+
+# in <path-to-this-repo>/
+python predict.py model_cn config.json images/test_2.jpg test_2_out.jpg
   
 # Data 
   Data for train and evaluation can be downloaded in the Google Drive folders (refer the wiki 'data' page)
