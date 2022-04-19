@@ -4,6 +4,7 @@ Furthermore, this repository contains several modified models (Image inpainting 
 The model modification against the vanila model has been done in architecture and in loss functions. 
 The models implementing different architecture and different loss functions are separated to different train_<XYZ>.py files. 
 The ideas and experiments are explained in summary paper. 
+  
 https://github.com/SoojungHong/image_inpainting_model_for_lane_geomery_discovery/blob/main/summary/Image_inpainting_model_paper_SoojungHong_2021.pdf
 
 # Baseline model
