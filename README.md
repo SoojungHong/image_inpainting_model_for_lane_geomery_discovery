@@ -36,3 +36,10 @@ parser.add_argument('--data_parallel', action='store_true', default=False)
 In case the experiment is conducting using different loss function, please double check the used loss function in completion network and context discriminator
 
 5. In case, resuming the training with previously trained model, check Optimizer is loaded and move to GPU correctly
+  
+# Dependencies
+  requirements.txt
+  
+# Train 
+  train.py is the training with baseline model
+  
