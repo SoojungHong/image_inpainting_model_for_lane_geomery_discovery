@@ -41,6 +41,16 @@ In case the experiment is conducting using different loss function, please doubl
   
 # Dependencies
   requirements.txt
+   
+    Python: 3.7.6
+    torch: 1.9.0 (cuda 11.1)
+    torchvision: 0.10.0
+    tqdm: 4.61.1
+    Pillow: 8.2.0
+    opencv-python: 4.5.2.54
+    numpy: 1.19.2
+    GPU: Geforce GTX 1080Ti (12GB RAM) X 4
+
   
 # Train 
   train.py is for training with baseline model.
