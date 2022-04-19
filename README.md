@@ -54,7 +54,7 @@ In case the experiment is conducting using different loss function, please doubl
   
 # Train 
   
-  python train.py datasets/img_align_celeba results/demo/
+  python train.py datasets/<your_data_path>/
   
   train.py is for training with baseline model.
   
