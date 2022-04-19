@@ -41,7 +41,9 @@ In case the experiment is conducting using different loss function, please doubl
   requirements.txt
   
 # Train 
-  train.py is for training with baseline model
-  train_with_deep_dual_conv.py is for training with improved architecture which use dual deep dilated convolution layers
+  train.py is for training with baseline model.
   
+  train_with_deep_dual_conv.py is for training with improved architecture which use dual deep dilated convolution layers.
+  
+  rain_with_various_loss.py is for training the various loss function. The newly adapted loss function is explained in the paper in summary folder.
   
