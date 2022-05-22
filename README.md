@@ -54,9 +54,15 @@ In case the experiment is conducting using different loss function, please doubl
   
 # Train 
   
-  Download data into <your_path>/data
+  1. Download data from DeepGlove(https://www.kaggle.com/datasets/balraj98/deepglobe-road-extraction-dataset?select=train)
   
-  The data folder should have 'train', 'val', 'test' subfolder
+  2. Since we need only geometry images (black road geometry line in white background), get only *_mask.png files and convert to 'black road geometry line in white background' image. For this task, you can use /util/deep_globe_data_prep.py 
+  
+  3. Put train data into <your_path>/data
+  
+  4. The data folder should have 'train', 'val', 'test' subfolder
+  
+  5. Train 
   
   To train the vanila model, 
   
