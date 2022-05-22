@@ -73,15 +73,18 @@ def completion_network_phase_one_loss(fakeIm, realIm):
     fakeIm[0, :, :, :] = self_transform(fakeIm[0, :, :, :])
     
     # realIm's shape is [1, 4, 256, 256]
-    realIm[0, :, :, :] = self_transform(realIm[0, :, :, :])  
+    #org realIm[0, :, :, :] = self_transform(realIm[0, :, :, :])  
+    realIm[0, :3, :, :] = self_transform(realIm[0, :3, :, :])  
     f_fake = contentFunc().forward(fakeIm)
    
-    f_real = contentFunc().forward(realIm[:, :, :, :]) 
+    #org f_real = contentFunc().forward(realIm[:, :, :, :]) 
+    f_real = contentFunc().forward(realIm[:, :3, :, :]) 
     f_real_no_grad = f_real.detach()
     self_criterion = nn.MSELoss()
     
     loss = self_criterion(f_fake, f_real_no_grad)
-    loss_content = 0.006 * torch.mean(loss) + 0.5 * nn.MSELoss()(fakeIm, realIm[:, :, :, :])
+    #org loss_content = 0.006 * torch.mean(loss) + 0.5 * nn.MSELoss()(fakeIm, realIm[:, :, :, :])
+    loss_content = 0.006 * torch.mean(loss) + 0.5 * nn.MSELoss()(fakeIm, realIm[:, :3, :, :])
     return loss_content 
 
 
