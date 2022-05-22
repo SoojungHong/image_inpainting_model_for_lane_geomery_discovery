@@ -54,13 +54,21 @@ In case the experiment is conducting using different loss function, please doubl
   
 # Train 
   
-  python train.py datasets/<your_data_path>/
+  Download data into <your_path>/data
   
-  train.py is for training with baseline model.
+  The data folder should have 'train', 'val', 'test' subfolder
   
-  train_with_deep_dual_conv.py is for training with improved architecture which use dual deep dilated convolution layers.
+  To train the vanila model, 
   
-  rain_with_various_loss.py is for training the various loss function. The newly adapted loss function is explained in the paper in summary folder.
+    python train.py <your_path>/data ./result
+  
+  To train with deep dilated convolution architecture model, 
+  
+    python train_with_deep_dual_conv.py <your_path>/data ./result
+  
+  To model with adapted loss functions (for better image quality)
+  
+    python train_with_various_loss.py <your_path>/data ./result
  
   
 # Inference
