@@ -60,7 +60,7 @@ In case the experiment is conducting using different loss function, please doubl
   
   3. Put train data into <your_path>/data
   
-  4. The data folder should have 'train', 'val', 'test' subfolder
+  4. The data folder should have 'train', 'val', 'test' subfolders
   
   5. Train 
   
