@@ -52,12 +52,12 @@ parser.add_argument('--init_model_cn', type=str, default=None)
 parser.add_argument('--init_model_cd', type=str, default=None)
 parser.add_argument('--init_opt_cn', type=str, default=None) #SJ_TEST
 parser.add_argument('--init_opt_cd', type=str, default=None) #SJ_TEST
-parser.add_argument('--steps_1', type=int, default=100) #ORG 90000
-parser.add_argument('--steps_2', type=int, default=100) #ORG 10000
-parser.add_argument('--steps_3', type=int, default=100) #ORG 400000
-parser.add_argument('--snaperiod_1', type=int, default=10) #ORG 10000
-parser.add_argument('--snaperiod_2', type=int, default=10) #ORG 2000
-parser.add_argument('--snaperiod_3', type=int, default=10) #ORG 10000
+parser.add_argument('--steps_1', type=int, default=90000) #ORG 90000
+parser.add_argument('--steps_2', type=int, default=10000) #ORG 10000
+parser.add_argument('--steps_3', type=int, default=40000) #ORG 40000
+parser.add_argument('--snaperiod_1', type=int, default=1000) #ORG 10000
+parser.add_argument('--snaperiod_2', type=int, default=1000) #ORG 2000
+parser.add_argument('--snaperiod_3', type=int, default=1000) #ORG 10000
 parser.add_argument('--max_holes', type=int, default=1)
 parser.add_argument('--hole_min_w', type=int, default=90) # ORG 48
 parser.add_argument('--hole_max_w', type=int, default=160) # ORG 96
