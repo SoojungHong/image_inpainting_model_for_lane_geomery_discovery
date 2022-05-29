@@ -11,6 +11,8 @@ import torch
 import numpy as np
 from tqdm import tqdm
 from models import CompletionNetwork, ContextDiscriminator
+from modified_models import CompletionNetwork_ModifiedDilation #SJ_TEST
+
 from datasets import ImageDataset
 from losses import completion_network_loss
 from gan_losses import discriminator_network_phase_two_loss, completion_network_phase_one_loss
@@ -50,12 +52,12 @@ parser.add_argument('--init_model_cn', type=str, default=None)
 parser.add_argument('--init_model_cd', type=str, default=None)
 parser.add_argument('--init_opt_cn', type=str, default=None) #SJ_TEST
 parser.add_argument('--init_opt_cd', type=str, default=None) #SJ_TEST
-parser.add_argument('--steps_1', type=int, default=100) #ORG 90000  
-parser.add_argument('--steps_2', type=int, default=100) #ORG 10000 
+parser.add_argument('--steps_1', type=int, default=100) #ORG 90000
+parser.add_argument('--steps_2', type=int, default=100) #ORG 10000
 parser.add_argument('--steps_3', type=int, default=100) #ORG 400000
-parser.add_argument('--snaperiod_1', type=int, default=10) #ORG 10000 
-parser.add_argument('--snaperiod_2', type=int, default=10) #ORG 2000 
-parser.add_argument('--snaperiod_3', type=int, default=10) #ORG 10000 
+parser.add_argument('--snaperiod_1', type=int, default=10) #ORG 10000
+parser.add_argument('--snaperiod_2', type=int, default=10) #ORG 2000
+parser.add_argument('--snaperiod_3', type=int, default=10) #ORG 10000
 parser.add_argument('--max_holes', type=int, default=1)
 parser.add_argument('--hole_min_w', type=int, default=90) # ORG 48
 parser.add_argument('--hole_max_w', type=int, default=160) # ORG 96
@@ -63,9 +65,9 @@ parser.add_argument('--hole_min_h', type=int, default=90) # ORG 48
 parser.add_argument('--hole_max_h', type=int, default=160) # ORG 96
 parser.add_argument('--cn_input_size', type=int, default=256) #ORG default = 160 #SJ_COMMENT : complete network input size
 parser.add_argument('--ld_input_size', type=int, default=160) #SJ_COMMENT : ld = local discriminator? 
-parser.add_argument('--bsize', type=int, default=1)
+parser.add_argument('--bsize', type=int, default=6)
 parser.add_argument('--bdivs', type=int, default=1)
-parser.add_argument('--num_test_completions', type=int, default=6)
+parser.add_argument('--num_test_completions', type=int, default=4)
 parser.add_argument('--mpv', nargs=3, type=float, default=None)
 parser.add_argument('--alpha', type=float, default=4e-4)
 parser.add_argument('--arc', type=str, choices=['celeba', 'places2'], default='celeba') # ORG : what is arc
@@ -77,7 +79,7 @@ def tensor_to_image(images_tensor, image_name):
   save_image(img1, image_name+'.png') 
 
 #SJ_TEST 
-self_fake_pool = ImagePool(50)  # create image buffer to store previously generated images
+self_fake_pool = ImagePool(50) # ORG 50  # create image buffer to store previously generated images
 self_real_pool = ImagePool(50)
   
   
@@ -90,7 +92,7 @@ def main(args):
         raise Exception('At least one gpu must be available.')
     gpu = torch.device('cuda:0')
     
-    # create result directory (if necessary)
+    # create vanila_result directory (if necessary)
     if not os.path.exists(args.result_dir):
         os.makedirs(args.result_dir)
     for phase in ['phase_1', 'phase_2', 'phase_3']:
@@ -103,7 +105,7 @@ def main(args):
         transforms.RandomCrop((args.cn_input_size, args.cn_input_size)),
         transforms.ToTensor(),
     ])
-    print('loading dataset... (it may take a few minutes)')
+    #print('loading dataset... (it may take a few minutes)')
     train_dset = ImageDataset(
         os.path.join(args.data_dir, 'train'),
         trnsfm,
@@ -166,7 +168,8 @@ def main(args):
     # Training Phase 1
     # ================================================
     # load completion network
-    model_cn = CompletionNetwork()
+    #ORG model_cn = CompletionNetwork()
+    model_cn = CompletionNetwork_ModifiedDilation()
     opt_cn = Adadelta(model_cn.parameters())
     if args.init_model_cn is not None:
         model_cn.load_state_dict(torch.load(
@@ -227,7 +230,7 @@ def main(args):
             #print('debug : input.shape >> ', input.shape) #SJ_TEST
             output = model_cn(input)
             #tensor_to_image(output, '5_output') # SJ_TEST
-            #ORG loss = completion_network_loss(x, output, mask)
+            #loss = completion_network_loss(x, output, mask) #ORG
             loss = completion_network_phase_one_loss(output * mask, input * mask) #SJ_TEST
            
             # backward
@@ -371,8 +374,8 @@ def main(args):
                 input_gd_fake.to(gpu)))
              
             # ORG loss_fake = bceloss(output_fake, fake) # Original loss
-            print('[debug] output_fake : ', output_fake) 
-            print('[debug] fake : ', fake)  
+            #print('[debug] output_fake : ', output_fake)
+            #print('[debug] fake : ', fake)
             #ORG loss_fake = bceloss(output_fake, fake)
             loss_fake = discriminator_network_phase_two_loss(output_fake, fake, self_fake_pool, self_real_pool) # SJ_TEST
             
@@ -388,8 +391,8 @@ def main(args):
             output_real = model_cd((input_ld_real, input_gd_real))
            
             # ORG loss_real = bceloss(output_real, real)
-            print('[debug] output_real : ', output_real) 
-            print('[debug] real : ', real)
+            #print('[debug] output_real : ', output_real)
+            #print('[debug] real : ', real)
             # ORG loss_real = bceloss(output_real, real)
             loss_real = discriminator_network_phase_two_loss(output_real, real, self_fake_pool, self_real_pool) # SJ_TEST
             
@@ -465,8 +468,8 @@ def main(args):
                 if pbar.n >= args.steps_2:
                     break
     pbar.close()
-    print('[debug] x2_index : ', x2_index)
-    print('[debug] x2_sum : ', x2_sum)
+    #print('[debug] x2_index : ', x2_index)
+    #print('[debug] x2_sum : ', x2_sum)
 
     # ================================================
     # Training Phase 3
@@ -636,8 +639,8 @@ def main(args):
                 if pbar.n >= args.steps_3:
                     break
     pbar.close()
-    print('[debug] x3_index : ', x3_index)
-    print('[debug] x3_sum : ', x3_sum)
+    #print('[debug] x3_index : ', x3_index)
+    #print('[debug] x3_sum : ', x3_sum)
 
 if __name__ == '__main__':
     args = parser.parse_args()
