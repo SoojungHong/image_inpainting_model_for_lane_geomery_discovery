@@ -27,7 +27,6 @@ def get_ccq_metrics(x, y):
 
     # Input arrays must have the same label value
     assert np.all(np.unique(x) == np.unique(y))
-
     tn, fp, fn, tp = confusion_matrix(y.ravel(), x.ravel()).ravel()
 
     corr = tp / (tp + fp)
@@ -41,19 +40,24 @@ def get_ccq_metrics(x, y):
 all_correctness = []
 all_completeness = []
 all_quality = []
-image_path = '/Users/soojunghong/PycharmProjects/inpainting_metric/test_images/'
+image_path = '/home/shong/mass_data/val_out_oct_16/' #'/Users/soojunghong/PycharmProjects/inpainting_metric/test_images/'
 
 for f in glob.glob(image_path + "*.png"):
         fname = os.path.basename(f)
+        print('current file :', fname)
         img = cv2.imread(image_path+fname)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # Maybe not needed
 
-        # TODO : correct the pixel
-        label_img = img[:, :1024]
-        mask_img = img[:, 1024:2048]  # 0, 255 (also works with 0, 1)
-        pred_img = img[:, 2048:]  # 0, 255 (thresholded prediction)
+        #(thresh, blackAndWhiteImage) = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+        (thresh, blackAndWhiteImage) = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+        img = blackAndWhiteImage
 
-        corr, comp, qual = get_ccq_metrics(pred_img, mask_img)  # TODO : correct the image name
+        # TODO : correct the pixel
+        label_img = img[:, :256]
+        mask_img = img[:, 256:512]  # 0, 255 (also works with 0, 1)
+        pred_img = img[:, 512:]  # 0, 255 (thresholded prediction)
+
+        corr, comp, qual = get_ccq_metrics(pred_img, label_img)  # TODO : correct the image name
         print('correctness/completeness/quality : ', fname, corr, comp, qual)
         all_correctness.append(corr)
         all_completeness.append(comp)
@@ -64,4 +68,3 @@ avg_correctness = np.mean(all_correctness)
 avg_completeness = np.mean(all_completeness)
 avg_quality = np.mean(all_quality)
 print('>>>>> avg correctness/completeness/quality : ', avg_correctness, avg_completeness, avg_quality)
-
