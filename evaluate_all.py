@@ -46,7 +46,7 @@ for f in glob.glob(image_path + "*.png"):
         fname = os.path.basename(f)
         print('current file :', fname)
         img = cv2.imread(image_path+fname)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # Maybe not needed
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
 
         #(thresh, blackAndWhiteImage) = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
         (thresh, blackAndWhiteImage) = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
