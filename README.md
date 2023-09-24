@@ -40,6 +40,7 @@ that our approach shows the best image quality in the road ge-
 ometry inpainting problem. Furthermore, Figure 1 shows the
 effectiveness of our method on various road types, implying that it understands underlying road geometries to reconstruct
 the road location.
+
 <img src="https://github.com/SoojungHong/image_inpainting_model_for_lane_geomery_discovery/assets/17648100/dd4e2c27-acc4-4b70-a5ab-dad8a87417b2" width="400" />
 
 
