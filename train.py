@@ -44,7 +44,7 @@ parser.add_argument('--hole_min_w', type=int, default=90) # ORG 48
 parser.add_argument('--hole_max_w', type=int, default=160) # ORG 96
 parser.add_argument('--hole_min_h', type=int, default=90) # ORG 48
 parser.add_argument('--hole_max_h', type=int, default=160) # ORG 96
-parser.add_argument('--cn_input_size', type=int, default=256) #ORG default = 160 #SJ_COMMENT : complete network input size
+parser.add_argument('--cn_input_size', type=int, default=256) #ORG default = 160 
 parser.add_argument('--ld_input_size', type=int, default=160) 
 parser.add_argument('--bsize', type=int, default=8)
 parser.add_argument('--bdivs', type=int, default=1)
