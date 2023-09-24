@@ -11,7 +11,7 @@ import torch
 import numpy as np
 from tqdm import tqdm
 from models import CompletionNetwork, ContextDiscriminator
-from modified_models import CompletionNetwork_ModifiedDilation #SJ_TEST
+from modified_models import CompletionNetwork_ModifiedDilation 
 
 from datasets import ImageDataset
 from losses import completion_network_loss
