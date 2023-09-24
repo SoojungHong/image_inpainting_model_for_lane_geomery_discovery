@@ -67,7 +67,7 @@ def get_classic_metrics(x, y):
         f1 (float): Quality metric
         iou (float): IoU metric
     """
-    #from sklearn.metrics import confusion_matrix
+
 
     # Input arrays must have the same label value
     assert np.all(np.unique(x) == np.unique(y))
