@@ -33,9 +33,7 @@ which are widely used in road extraction tasks We choose four random road maps p
 each road type: Straight, Curvy, T-junction, and Intersection,
 where the latter three types are known to be challenging for
 existing post-processing methods. 
-Table 1 shows the performance impact on various modi-
-fications: GLCRC being the architectural and GLCRC+L be-
-ing the training loss modifications. We can clearly observe
+Table 1 shows the performance impact on various modifications: GLCRC being the architectural and GLCRC+L being the training loss modifications. We can clearly observe
 that our approach shows the best image quality in the road ge-
 ometry inpainting problem. Furthermore, Figure 1 shows the
 effectiveness of our method on various road types, implying that it understands underlying road geometries to reconstruct
