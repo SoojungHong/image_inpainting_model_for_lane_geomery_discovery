@@ -1,4 +1,4 @@
-## Correcting Faulty Road Maps by image in painting
+## Correcting Faulty Road Maps by image inpainting
 
 As maintaining road networks is labor-intensive, many au-
 tomatic road extraction approaches have been introduced to
